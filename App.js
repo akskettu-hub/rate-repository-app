@@ -9,6 +9,8 @@ export default function App() {
     </View>
   );
 }
+
+// these lines are superfluous. Added to make sure linter picks something up. To be deleted
 console.log('something')
 const beans = params => params * 10;
 
