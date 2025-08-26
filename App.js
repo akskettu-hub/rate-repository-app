@@ -9,6 +9,8 @@ export default function App() {
     </View>
   );
 }
+console.log('something')
+const beans = params => params * 10;
 
 const styles = StyleSheet.create({
   container: {
