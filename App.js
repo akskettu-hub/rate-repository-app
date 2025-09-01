@@ -1,26 +1,7 @@
-import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View } from "react-native"
+import Main from './src/components/Main';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Beans, beans beans!!!</Text>
-      <StatusBar style="auto" />
-    </View>
-  )
-}
+const App = () => {
+  return <Main />;
+};
 
-// these lines are superfluous. Added to make sure linter picks something up. To be deleted
-// eslint-disable-next-line no-undef
-console.log("something")
-const beans = (params) => params * 10;
-beans(5)
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})
+export default App;
