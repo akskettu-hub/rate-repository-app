@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet } from "react-native"
 import Text from "./Text"
+import theme from "../theme"
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
 const AppBarTab = ({ children }) => {
   return (
     <Pressable style={styles.container} onPress={() => { console.log('pressed Pressable') }}>
-      <Text color={'white'} fontWeight={'bold'} fontSize={'heading'} >
+      <Text color={theme.colors.white} fontWeight={'bold'} fontSize={'heading'} >
         {children}
       </Text>
     </Pressable>

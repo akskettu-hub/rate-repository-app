@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +10,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     paddingHorizontal: 10,
     paddingBottom: 15,
-    backgroundColor: 'grey'
+    backgroundColor: theme.colors.grey
   },
 });
 
@@ -17,9 +18,7 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <AppBarTab>Repositories</AppBarTab>
-      <AppBarTab>Beans</AppBarTab>
     </View>
-
   )
 };
 
