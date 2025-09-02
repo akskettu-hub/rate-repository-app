@@ -3,7 +3,7 @@ import { GET_REPOSITORIES } from "../graphql/queries";
 
 const useRepositories = () => {
   const { data, refetch, loading, error } = useQuery(GET_REPOSITORIES, {
-    fetchPolicy: "cache-first",
+    fetchPolicy: "cache-and-network",
   });
 
   // eslint-disable-next-line no-undef

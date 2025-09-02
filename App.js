@@ -3,10 +3,14 @@ import Main from "./src/components/Main";
 import { StatusBar } from "expo-status-bar";
 import { ApolloProvider } from "@apollo/client/react";
 import createApolloClient from "./src/utils/apolloClient";
+import Constants from "expo-constants";
 
 const apolloClient = createApolloClient();
 
 const App = () => {
+  // eslint-disable-next-line no-undef
+  console.log(Constants.expoConfig);
+
   return (
     <>
       <NativeRouter>
