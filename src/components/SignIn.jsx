@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import Text from "./Text";
 import { useFormik } from "formik";
 import theme from "../theme";
+import * as yup from "yup";
 
 const initialValues = {
   username: "",
@@ -11,9 +12,11 @@ const initialValues = {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
+    padding: 5,
   },
   input: {
-    margin: 12,
+    marginHorizontal: 10,
+    marginTop: 10,
     borderWidth: 2,
     borderRadius: 6,
     borderColor: theme.colors.textSecondary,
@@ -22,11 +25,26 @@ const styles = StyleSheet.create({
   submit: {
     backgroundColor: theme.colors.primary,
     borderColor: theme.colors.primary,
-    margin: 12,
+    margin: 10,
     borderRadius: 6,
     padding: 10,
     alignItems: "center",
   },
+  error: {
+    marginHorizontal: 10,
+    color: "red",
+  },
+});
+
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .min(3, "Username must be at least 3 characters long")
+    .required("Username is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters long")
+    .required(),
 });
 
 const onSubmit = (values) => {
@@ -37,6 +55,7 @@ const SignIn = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
+    validationSchema,
   });
 
   return (
@@ -47,6 +66,9 @@ const SignIn = () => {
         style={styles.input}
         onChangeText={formik.handleChange("username")}
       />
+      {formik.touched.username && formik.errors.username && (
+        <Text style={styles.error}>{formik.errors.username}</Text>
+      )}
       <TextInput
         placeholder="Password"
         value={formik.values.password}
@@ -54,6 +76,9 @@ const SignIn = () => {
         onChangeText={formik.handleChange("password")}
         secureTextEntry={true}
       />
+      {formik.touched.password && formik.errors.password && (
+        <Text style={styles.error}>{formik.errors.password}</Text>
+      )}
       <Pressable onPress={formik.handleSubmit} style={styles.submit}>
         <Text fontSize={"subheading"} fontWeight={"bold"} color={"white"}>
           Sign In
