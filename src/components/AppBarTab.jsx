@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import Text from "./Text";
 import theme from "../theme";
-import { Link } from "react-router-native";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,19 +9,25 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ link, children }) => {
+const AppBarTab = ({ link, children, onPress }) => {
+  const navigate = useNavigate()
+
+  const handlePress = () => {
+    console.log("pressed app bar tab", children);
+    if (onPress) {
+      onPress();
+    }
+    if (link) {
+      navigate(link)
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Link to={link}>
-        <Text
-          color={theme.colors.white}
-          fontWeight={"bold"}
-          fontSize={"heading"}
-        >
-          {children}
-        </Text>
-      </Link>
-    </View>
+    <Pressable style={styles.container} onPress={handlePress}>
+      <Text color={theme.colors.white} fontWeight={"bold"} fontSize={"heading"}>
+        {children}
+      </Text>
+    </Pressable>
   );
 };
 
