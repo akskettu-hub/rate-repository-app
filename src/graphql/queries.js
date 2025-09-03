@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_REPOSITORIES = gql`
   query {
@@ -16,6 +16,15 @@ export const GET_REPOSITORIES = gql`
           stargazersCount
         }
       }
+    }
+  }
+`;
+
+export const GET_USER_INFO = gql`
+  query {
+    me {
+      id
+      username
     }
   }
 `;

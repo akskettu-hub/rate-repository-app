@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBarTab = ({ link, children, onPress }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handlePress = () => {
     console.log("pressed app bar tab", children);
@@ -18,7 +18,7 @@ const AppBarTab = ({ link, children, onPress }) => {
       onPress();
     }
     if (link) {
-      navigate(link)
+      navigate(link);
     }
   };
 

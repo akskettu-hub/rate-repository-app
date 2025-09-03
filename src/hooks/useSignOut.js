@@ -17,7 +17,7 @@ const useSignOut = () => {
     await apolloClient.resetStore();
 
     // eslint-disable-next-line no-undef
-    console.log('user logged out.')
+    console.log("user logged out.");
   };
 
   return signOut;
