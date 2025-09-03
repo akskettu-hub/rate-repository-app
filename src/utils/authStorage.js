@@ -7,21 +7,11 @@ class AuthStorage {
 
   async getAccessToken() {
     // Get the access token for the storage
-    const rawAccessToken = await AsyncStorage.getItem(
-      `${this.namespace}:accessToken`,
-    );
-
-    return rawAccessToken ? JSON.parse(rawAccessToken) : null;
+    return await AsyncStorage.getItem(`${this.namespace}:accessToken`);
   }
 
   async setAccessToken(accessToken) {
-    // Add the access token to the storage
-    await this.removeAccessToken();
-
-    await AsyncStorage.setItem(
-      `${this.namespace}:accessToken`,
-      JSON.stringify(accessToken),
-    );
+    await AsyncStorage.setItem(`${this.namespace}:accessToken`, accessToken);
   }
 
   async removeAccessToken() {

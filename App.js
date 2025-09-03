@@ -4,8 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import { ApolloProvider } from "@apollo/client/react";
 import createApolloClient from "./src/utils/apolloClient";
 import Constants from "expo-constants";
+import AuthStorage from "./src/utils/authStorage";
+import AuthStorageContext from "./src/contexts/AuthStorageContext";
 
-const apolloClient = createApolloClient();
+const authStorage = new AuthStorage();
+const apolloClient = createApolloClient(authStorage);
 
 const App = () => {
   // eslint-disable-next-line no-undef
@@ -15,7 +18,9 @@ const App = () => {
     <>
       <NativeRouter>
         <ApolloProvider client={apolloClient}>
-          <Main />
+          <AuthStorageContext.Provider value={authStorage}>
+            <Main />
+          </AuthStorageContext.Provider>
         </ApolloProvider>
       </NativeRouter>
       <StatusBar style="auto" />

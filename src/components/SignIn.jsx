@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import theme from "../theme";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
+import { useNavigate } from "react-router-native";
 
 const initialValues = {
   username: "",
@@ -45,20 +46,25 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters long")
-    .required(),
+    .required("Password is required"),
 });
 
 const SignIn = () => {
-  const [signIn] = useSignIn()
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
-    const { username, password } = values
+    const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password })
-      console.log(data)
+      const { data } = await signIn({ username, password });
+      console.log("Data from signing in: ", data);
+      navigate("/");
     } catch (e) {
-      console.log(e)
+      console.log("ApolloError:", e);
+      console.log("GraphQL errors:", e?.graphQLErrors);
+      console.log("Network errors:", e?.networkError);
+      console.log("Message:", e?.message);
     }
   };
 
