@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([{
-  extends: compat.extends("eslint:recommended", "plugin:react/recommended", "prettier"),
+  extends: compat.extends("eslint:recommended", "plugin:react/recommended", "prettier", "plugin:jest/recommended"),
 
   plugins: {
     react,
