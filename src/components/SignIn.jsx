@@ -49,25 +49,7 @@ const validationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
-
-  const onSubmit = async (values) => {
-    const { username, password } = values;
-
-    try {
-      const { data } = await signIn({ username, password });
-      console.log("Data from signing in: ", data);
-      navigate("/");
-    } catch (e) {
-      console.log("ApolloError:", e);
-      console.log("GraphQL errors:", e?.graphQLErrors);
-      console.log("Network errors:", e?.networkError);
-      console.log("Message:", e?.message);
-    }
-  };
-
+export const SignInContainer = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -102,6 +84,28 @@ const SignIn = () => {
       </Pressable>
     </View>
   );
+};
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log("Data from signing in: ", data);
+      navigate("/");
+    } catch (e) {
+      console.log("ApolloError:", e);
+      console.log("GraphQL errors:", e?.graphQLErrors);
+      console.log("Network errors:", e?.networkError);
+      console.log("Message:", e?.message);
+    }
+  };
+
+  return <SignInContainer onSubmit={onSubmit} />
 };
 
 export default SignIn;
