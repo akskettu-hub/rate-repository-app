@@ -6,9 +6,6 @@ const useRepositories = () => {
     fetchPolicy: "cache-and-network",
   });
 
-  // eslint-disable-next-line no-undef
-  console.log("data in UR: ", data);
-
   return {
     repositories: data ? data.repositories : false,
     loading,
