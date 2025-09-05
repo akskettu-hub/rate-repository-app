@@ -28,6 +28,7 @@ export const GET_REPOSITORY = gql`
   query Repository($repositoryId: ID!) {
     repository(id: $repositoryId) {
       ...repositoryFields
+      url
     }
   }
 
