@@ -1,18 +1,24 @@
-import * as Linking from 'expo-linking';
+/* eslint-disable no-undef */
+import * as Linking from "expo-linking";
 
 const useOpenUrl = () => {
   const openUrl = async (url) => {
+    console.log("Pressed open github");
+    console.log("url: ", url);
 
-    console.log("pressed open github")
-    console.log("url: ", url)
-    const canOpenLink = await Linking.canOpenURL(url)
-    console.log("can Open Link: ", canOpenLink)
+    try {
+      const canOpenLink = await Linking.canOpenURL(url);
+      if (canOpenLink) {
+        const openedUrl = await Linking.openURL(url);
+        console.log("Opened Url successfully: ", openedUrl);
+      } else {
+        console.error("Error checking link: ", url);
+      }
+    } catch (e) {
+      console.error("Error opening link: ", e);
+    }
+  };
+  return openUrl;
+};
 
-    const openedUrl = await Linking.openURL(url)
-    console.log("Opened Url successfully: ", openedUrl)
-
-  }
-  return openUrl
-}
-
-export default useOpenUrl
+export default useOpenUrl;
