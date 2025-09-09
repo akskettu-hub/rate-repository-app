@@ -2,9 +2,10 @@ import { FlatList, View, StyleSheet, Pressable } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../../hooks/useRepositories";
 import { useNavigate } from "react-router-native";
-import OrderSelector from "./OrderSelector";
 import { useState } from "react";
 import { orderOptions } from "../../utils/orderOptions";
+import RepositoryListHeader from "./RepositoryListHeader";
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -19,6 +20,8 @@ export const RepositoryListContainer = ({
   repositories,
   selectedOrder,
   setSelectedOrder,
+  searchQuery,
+  setSearchQuery,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -30,7 +33,9 @@ export const RepositoryListContainer = ({
       extraData={setSelectedOrder}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={
-        <OrderSelector
+        <RepositoryListHeader
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           selectedOrder={selectedOrder}
           setSelectedOrder={setSelectedOrder}
         />
@@ -48,8 +53,11 @@ const RepositoryList = () => {
   const [selectedOrder, setSelectedOrder] = useState(
     orderOptions["latestDesc"],
   );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 1000);
   const orderArgs = orderOptions[selectedOrder] || orderOptions["latestDesc"];
-  const { repositories } = useRepositories(orderArgs);
+
+  const { repositories } = useRepositories(orderArgs, debouncedSearchQuery);
   const navigate = useNavigate();
 
   return (
@@ -58,6 +66,8 @@ const RepositoryList = () => {
       navigate={navigate}
       selectedOrder={selectedOrder}
       setSelectedOrder={setSelectedOrder}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   );
 };
