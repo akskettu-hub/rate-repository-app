@@ -64,7 +64,6 @@ const SignUpForm = () => {
 
   const onSubmit = async (values) => {
     console.log("Hit sign up, values: ", values);
-    // TODO: implement signup
     const { username, password } = values;
 
     const payload = await createUser({ username, password });
