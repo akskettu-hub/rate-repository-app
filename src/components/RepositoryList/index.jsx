@@ -2,6 +2,9 @@ import { FlatList, View, StyleSheet, Pressable } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../../hooks/useRepositories";
 import { useNavigate } from "react-router-native";
+import OrderSelector from "./OrderSelector";
+import { useState } from "react";
+import { orderOptions } from "../../utils/orderOptions";
 
 const styles = StyleSheet.create({
   separator: {
@@ -11,7 +14,12 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ navigate, repositories }) => {
+export const RepositoryListContainer = ({
+  navigate,
+  repositories,
+  selectedOrder,
+  setSelectedOrder,
+}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -19,7 +27,14 @@ export const RepositoryListContainer = ({ navigate, repositories }) => {
   return (
     <FlatList
       data={repositoryNodes}
+      extraData={setSelectedOrder}
       ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={
+        <OrderSelector
+          selectedOrder={selectedOrder}
+          setSelectedOrder={setSelectedOrder}
+        />
+      }
       renderItem={({ item }) => (
         <Pressable onPress={() => navigate(item.id)}>
           <RepositoryItem item={item} />
@@ -30,11 +45,20 @@ export const RepositoryListContainer = ({ navigate, repositories }) => {
 };
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [selectedOrder, setSelectedOrder] = useState(
+    orderOptions["latestDesc"],
+  );
+  const orderArgs = orderOptions[selectedOrder] || orderOptions["latestDesc"];
+  const { repositories } = useRepositories(orderArgs);
   const navigate = useNavigate();
 
   return (
-    <RepositoryListContainer repositories={repositories} navigate={navigate} />
+    <RepositoryListContainer
+      repositories={repositories}
+      navigate={navigate}
+      selectedOrder={selectedOrder}
+      setSelectedOrder={setSelectedOrder}
+    />
   );
 };
 

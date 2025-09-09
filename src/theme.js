@@ -7,6 +7,7 @@ const theme = {
     primary: "#0366d6",
     white: "white",
     grey: "#24292e",
+    lightGrey: "#cccccc",
   },
   fontSizes: {
     body: 14,
