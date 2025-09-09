@@ -3,6 +3,9 @@ import theme from "../theme";
 import { useFormik } from "formik";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import Text from "./Text";
+import useCreateUser from "../hooks/useCreateUser";
+import useSignIn from "../hooks/useSignIn";
+import { useNavigate } from "react-router-native";
 
 const initialValues = {
   username: "",
@@ -23,7 +26,7 @@ const validationSchema = yup.object().shape({
     .required("Password is required"),
   passwordConfirm: yup
     .string()
-    .oneOf([yup.ref("password"), "Password must match"])
+    .oneOf([yup.ref("password"), null], "Password must match")
     .required("Password confirm is required"),
 });
 
@@ -55,8 +58,24 @@ const styles = StyleSheet.create({
 });
 
 const SignUpForm = () => {
-  const onSubmit = (values) => {
+  const [createUser] = useCreateUser();
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
     console.log("Hit sign up, values: ", values);
+    // TODO: implement signup
+    const { username, password } = values;
+
+    const payload = await createUser({ username, password });
+
+    console.log("create user payload", payload);
+
+    if (payload.data?.createUser) {
+      // log newly create user in
+      await signIn({ username, password });
+      navigate("/", { replace: true });
+    }
   };
 
   const formik = useFormik({
