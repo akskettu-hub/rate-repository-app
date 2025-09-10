@@ -2,12 +2,16 @@ import { StyleSheet, View } from "react-native";
 import Text from "../Text";
 import theme from "../../theme";
 import formatDate from "../../utils/formatDate";
+import UserReviewsItemButtons from "../UserReviewsView/UserReviewsItemButtons";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     marginHorizontal: 5,
     marginVertical: 10,
+  },
+  reviewInfoContainer: {
+    flexDirection: "row",
   },
   ratingBlob: {
     padding: 5,
@@ -29,18 +33,21 @@ const styles = StyleSheet.create({
 const ReviewItem = ({ item, userReview = false }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.ratingBlob}>
-        <Text color={"primary"} fontSize={"heading"} fontWeight={"bold"}>
-          {item.rating}
-        </Text>
+      <View style={styles.reviewInfoContainer}>
+        <View style={styles.ratingBlob}>
+          <Text color={"primary"} fontSize={"heading"} fontWeight={"bold"}>
+            {item.rating}
+          </Text>
+        </View>
+        <View style={styles.reviewInfo}>
+          <Text fontWeight={"bold"} fontSize={"subheading"}>
+            {userReview ? item.repository.fullName : item.user.username}
+          </Text>
+          <Text color={"textSecondary"}>{formatDate(item.createdAt)}</Text>
+          <Text>{item.text}</Text>
+        </View>
       </View>
-      <View style={styles.reviewInfo}>
-        <Text fontWeight={"bold"} fontSize={"subheading"}>
-          {userReview ? item.repository.fullName : item.user.username}
-        </Text>
-        <Text color={"textSecondary"}>{formatDate(item.createdAt)}</Text>
-        <Text>{item.text}</Text>
-      </View>
+      {userReview && <UserReviewsItemButtons />}
     </View>
   );
 };
