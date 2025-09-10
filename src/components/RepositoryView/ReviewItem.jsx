@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewItem = ({ item }) => {
+const ReviewItem = ({ item, userReview = false }) => {
   return (
     <View style={styles.container}>
       <View style={styles.ratingBlob}>
@@ -36,7 +36,7 @@ const ReviewItem = ({ item }) => {
       </View>
       <View style={styles.reviewInfo}>
         <Text fontWeight={"bold"} fontSize={"subheading"}>
-          {item.user.username}
+          {userReview ? item.repository.fullName : item.user.username}
         </Text>
         <Text color={"textSecondary"}>{formatDate(item.createdAt)}</Text>
         <Text>{item.text}</Text>

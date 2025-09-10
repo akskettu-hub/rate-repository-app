@@ -4,6 +4,7 @@ import AppBarTab from "./AppBarTab";
 import theme from "../../theme";
 import useSignOut from "../../hooks/useSignOut";
 import useUserInfo from "../../hooks/useUserInfo";
+import UserReviewsView from "../UserReviewsView";
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +27,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab link={"/"}>Repositories</AppBarTab>
+        {me && <AppBarTab link={"userReviews"}>My Reviews</AppBarTab>}
         {me && <AppBarTab link={"createReview"}>Create a Review</AppBarTab>}
         {me ? (
           <AppBarTab link={"signIn"} onPress={signOut}>
