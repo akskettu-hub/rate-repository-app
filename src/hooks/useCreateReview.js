@@ -1,8 +1,8 @@
-import { useMutation } from "@apollo/client"
-import { CREATE_REVIEW } from "../graphql/mutations"
+import { useMutation } from "@apollo/client";
+import { CREATE_REVIEW } from "../graphql/mutations";
 
 const useCreateReview = () => {
-  const [mutate, result] = useMutation(CREATE_REVIEW)
+  const [mutate, result] = useMutation(CREATE_REVIEW);
 
   const createReview = async ({ rating, repositoryName, text, ownerName }) => {
     const payload = await mutate({
@@ -12,16 +12,14 @@ const useCreateReview = () => {
           repositoryName: repositoryName,
           text: text,
           ownerName: ownerName,
-        }
-      }
-    })
+        },
+      },
+    });
 
-    // const { data } = payload
+    return payload;
+  };
 
-    return payload
-  }
+  return [createReview, result];
+};
 
-  return [createReview, result]
-}
-
-export default useCreateReview
+export default useCreateReview;

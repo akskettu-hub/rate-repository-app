@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
 });
 
 const UserReviewsView = () => {
-  const { me } = useUserInfo({ includeReviews: true });
+  const { me, refetch } = useUserInfo({ includeReviews: true });
   const reviewNodes = me ? me.reviews.edges.map((edge) => edge.node) : [];
 
   if (me) {
     return (
       <View style={styles.container}>
-        <UserReviewsList reviewNodes={reviewNodes} />
+        <UserReviewsList reviewNodes={reviewNodes} refetch={refetch} />
       </View>
     );
   }

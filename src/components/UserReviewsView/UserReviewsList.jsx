@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const UserReviewsList = ({ reviewNodes }) => {
-  //const reviewNodes = reviews ? reviews.edges.map((edge) => edge.node) : [];
-
+const UserReviewsList = ({ reviewNodes, refetch }) => {
   return (
     <FlatList
       data={reviewNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <ReviewItem item={item} userReview={true} />}
+      renderItem={({ item }) => (
+        <ReviewItem item={item} userReview={true} refetch={refetch} />
+      )}
     />
   );
 };

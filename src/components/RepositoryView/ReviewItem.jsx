@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewItem = ({ item, userReview = false }) => {
+const ReviewItem = ({ item, userReview = false, refetch }) => {
   return (
     <View style={styles.container}>
       <View style={styles.reviewInfoContainer}>
@@ -47,7 +47,13 @@ const ReviewItem = ({ item, userReview = false }) => {
           <Text>{item.text}</Text>
         </View>
       </View>
-      {userReview && <UserReviewsItemButtons />}
+      {userReview && (
+        <UserReviewsItemButtons
+          repoId={item.repository.id}
+          reviewId={item.id}
+          refetch={refetch}
+        />
+      )}
     </View>
   );
 };

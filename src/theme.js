@@ -8,6 +8,7 @@ const theme = {
     white: "white",
     grey: "#24292e",
     lightGrey: "#cccccc",
+    red: "red"
   },
   fontSizes: {
     body: 14,
