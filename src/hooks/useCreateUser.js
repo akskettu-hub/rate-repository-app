@@ -17,7 +17,7 @@ const useCreateUser = () => {
     return payload;
   };
 
-  return [createUser, result]
+  return [createUser, result];
 };
 
-export default useCreateUser
+export default useCreateUser;

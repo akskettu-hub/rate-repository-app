@@ -13,7 +13,6 @@ const AppBarTab = ({ link, children, onPress }) => {
   const navigate = useNavigate();
 
   const handlePress = () => {
-    console.log("pressed app bar tab", children);
     if (onPress) {
       onPress();
     }

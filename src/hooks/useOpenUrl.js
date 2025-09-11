@@ -3,9 +3,6 @@ import * as Linking from "expo-linking";
 
 const useOpenUrl = () => {
   const openUrl = async (url) => {
-    console.log("Pressed open github");
-    console.log("url: ", url);
-
     try {
       const canOpenLink = await Linking.canOpenURL(url);
       if (canOpenLink) {

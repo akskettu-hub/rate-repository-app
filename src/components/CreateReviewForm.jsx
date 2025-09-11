@@ -71,7 +71,6 @@ const CreateReviewForm = () => {
       ...values,
       rating: Number(values.rating),
     };
-    console.log("pressed create review, values: ", parsedValues);
 
     const { rating, repositoryName, text, ownerName } = parsedValues;
 
@@ -81,10 +80,11 @@ const CreateReviewForm = () => {
       text,
       ownerName,
     });
-    console.log("create review result: ", payload);
 
     if (payload.data?.createReview?.repositoryId) {
-      navigate(`/${payload.data?.createReview?.repositoryId}`, { replace: true });
+      navigate(`/${payload.data?.createReview?.repositoryId}`, {
+        replace: true,
+      });
     }
   };
 

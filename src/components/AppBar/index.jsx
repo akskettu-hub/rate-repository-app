@@ -4,7 +4,6 @@ import AppBarTab from "./AppBarTab";
 import theme from "../../theme";
 import useSignOut from "../../hooks/useSignOut";
 import useUserInfo from "../../hooks/useUserInfo";
-import UserReviewsView from "../UserReviewsView";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +18,6 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const { me } = useUserInfo();
-  console.log("me: ", me);
-
   const signOut = useSignOut();
 
   return (

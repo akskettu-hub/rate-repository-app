@@ -5,7 +5,6 @@ const useDeleteReview = () => {
   const [mutate, result] = useMutation(DELETE_REVIEW);
 
   const deleteReview = async (deleteReviewId) => {
-    // console.log(deleteReviewId)
     const payload = await mutate({
       variables: {
         deleteReviewId: deleteReviewId,

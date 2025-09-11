@@ -63,15 +63,11 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
-    console.log("Hit sign up, values: ", values);
     const { username, password } = values;
 
     const payload = await createUser({ username, password });
 
-    console.log("create user payload", payload);
-
     if (payload.data?.createUser) {
-      // log newly create user in
       await signIn({ username, password });
       navigate("/", { replace: true });
     }

@@ -94,8 +94,7 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password });
-      console.log("Data from signing in: ", data);
+      await signIn({ username, password });
       navigate("/", { replace: true });
     } catch (e) {
       console.log("ApolloError:", e);

@@ -5,8 +5,8 @@ import theme from "../../theme";
 const styles = StyleSheet.create({
   picker: {
     backgroundColor: theme.colors.lightGrey,
-  }
-})
+  },
+});
 
 const OrderSelector = ({ selectedOrder, setSelectedOrder }) => {
   return (
@@ -15,7 +15,6 @@ const OrderSelector = ({ selectedOrder, setSelectedOrder }) => {
       selectedValue={selectedOrder}
       onValueChange={(itemValue) => {
         setSelectedOrder(itemValue);
-        console.log("item value: ", itemValue);
       }}
     >
       <Picker.Item label="Latest repositories" value="latestDesc" />
